@@ -19,8 +19,7 @@ if __name__ == '__main__':
     filename, comic_alt = download_random_comic()
     
     # получить адрес сервера vk
-    server_data = get_vk_server_address(token, group_id)
-    server_address = server_data['response']['upload_url']
+    server_address = get_vk_server_address(token, group_id)
     
     # загрузить фото на сервер vk
     image_data = upload_img_on_vk_server(server_address, filename)

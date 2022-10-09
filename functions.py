@@ -21,10 +21,7 @@ def download_random_comic():
     comic_alt = decoded_response['alt']
     extensions = ('.jpg', '.png', '.gif')
     if comic_url.endswith(extensions):
-        parsed_url = urlparse(comic_url)
-        splitted_path = os.path.splitext(parsed_url.path)
-        extension = splitted_path[-1]
-        filename = f'image{extension}'
+        filename = os.path.basename(comic_url)
         img_data = requests.get(comic_url).content
         Path('files').mkdir(parents=True, exist_ok=True)
         with open(os.path.join('files', filename), 'wb') as file:
@@ -43,7 +40,9 @@ def get_vk_server_address(token, group_id):
     response = requests.get(url, params=params)
     response.raise_for_status()
     
-    return response.json()
+    server_data = response.json()
+    
+    return server_data['response']['upload_url']
 
 
 def upload_img_on_vk_server(server_address, filename):
