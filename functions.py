@@ -53,12 +53,9 @@ def upload_img_on_vk_server(server_address, filename):
             'photo': file,
         }
         response = requests.post(url, files=files)
-        response.raise_for_status()
+    response.raise_for_status()
     
-    try:
-        shutil.rmtree('files')
-    except OSError as e:
-        print ("Error: %s - %s." % (e.filename, e.strerror))
+    shutil.rmtree('files')
     
     return response.json()
 
