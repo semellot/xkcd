@@ -6,28 +6,30 @@ import requests
 from urllib.parse import urlparse
 import random
 
+
 COUNT_COMICS = 2681
 
-def get_image_from_xkcd():
+
+def download_random_comic():
     comic_id = random.randint(1,COUNT_COMICS)
     url = f'https://xkcd.com/{comic_id}/info.0.json'
     response = requests.get(url)
     response.raise_for_status()
-    return response.json()
-
-
-def save_image(image_url):
+    decoded_response = response.json()
+    
+    comic_url = decoded_response['img']
+    comic_alt = decoded_response['alt']
     extensions = ('.jpg', '.png', '.gif')
-    if image_url.endswith(extensions):
-        parsed_url = urlparse(image_url)
+    if comic_url.endswith(extensions):
+        parsed_url = urlparse(comic_url)
         splitted_path = os.path.splitext(parsed_url.path)
         extension = splitted_path[-1]
         filename = f'image{extension}'
-        img_data = requests.get(image_url).content
+        img_data = requests.get(comic_url).content
         Path('files').mkdir(parents=True, exist_ok=True)
         with open(os.path.join('files', filename), 'wb') as file:
             file.write(img_data)
-        return filename
+        return filename, comic_alt
         
 
 def get_vk_server_address(token, group_id):

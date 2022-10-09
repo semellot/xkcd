@@ -2,8 +2,7 @@ from dotenv import load_dotenv
 import os
 
 from functions import (
-    get_image_from_xkcd,
-    save_image,
+    download_random_comic,
     get_vk_server_address,
     upload_img_on_vk_server,
     save_image_in_group,
@@ -16,12 +15,8 @@ if __name__ == '__main__':
     group_id = os.environ['GROUP_ID']
     token = os.environ['ACCESS_TOKEN']
     
-    # получить данные по последнему комиксу
-    comics = get_image_from_xkcd()
-    comics_url = comics['img']
-    
     # сохранить последний комикс
-    filename = save_image(comics_url)
+    filename, comic_alt = download_random_comic()
     
     # получить адрес сервера vk
     server_data = get_vk_server_address(token, group_id)
@@ -34,5 +29,5 @@ if __name__ == '__main__':
     saved_image_data = save_image_in_group(token, group_id, image_data)
     
     # Сделать публикацию
-    public_image_in_group(token, group_id, saved_image_data, comics['alt'])
+    public_image_in_group(token, group_id, saved_image_data, comic_alt)
     
