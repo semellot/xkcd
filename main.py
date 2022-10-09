@@ -12,9 +12,9 @@ from functions import (
 
 if __name__ == '__main__':
     load_dotenv()
-    client_id = os.environ['CLIENT_ID']
-    group_id = os.environ['GROUP_ID']
-    token = os.environ['ACCESS_TOKEN']
+    client_id = os.environ['VK_CLIENT_ID']
+    group_id = os.environ['VK_GROUP_ID']
+    token = os.environ['VK_ACCESS_TOKEN']
     
     try:
         # сохранить последний комикс

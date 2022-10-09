@@ -20,9 +20,9 @@
 3. Создать файл `.env` с данными:
 
     ```dotenv
-    CLIENT_ID=client_id
-    GROUP_ID=group_id
-    ACCESS_TOKEN=vk_token
+    VK_CLIENT_ID=client_id
+    VK_GROUP_ID=group_id
+    VK_ACCESS_TOKEN=vk_token
     ```        
 
 ## Примеры запуска скрипта
