@@ -41,5 +41,8 @@ if __name__ == '__main__':
     owner_id = saved_image_data['response'][0]['owner_id']
     
     # Сделать публикацию
-    public_image_in_group(token, group_id, image_id, owner_id, comic_alt)
+    response = public_image_in_group(token, group_id, image_id, owner_id, comic_alt)
+    
+    if 'error' not in response:
+        print('Комикс опубликован в группе')
     

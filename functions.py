@@ -87,8 +87,5 @@ def public_image_in_group(token, group_id, image_id, owner_id, message):
     }
     response = requests.post(url, params=params)
     response.raise_for_status()
-    decoded_response = response.json()
-    if 'error' not in decoded_response:
-        print('Комикс опубликован в группе')
-    
+    return response.json()
     
