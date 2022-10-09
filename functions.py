@@ -21,10 +21,10 @@ def download_random_comic():
     extensions = ('.jpg', '.png', '.gif')
     if comic_url.endswith(extensions):
         filename = os.path.basename(comic_url)
-        img_data = requests.get(comic_url).content
+        image = requests.get(comic_url).content
         Path('files').mkdir(parents=True, exist_ok=True)
         with open(os.path.join('files', filename), 'wb') as file:
-            file.write(img_data)
+            file.write(image)
         return filename, comic_alt
         
 
@@ -39,9 +39,9 @@ def get_vk_server_address(token, group_id):
     response = requests.get(url, params=params)
     response.raise_for_status()
     
-    server_data = response.json()
+    server = response.json()
     
-    return server_data['response']['upload_url']
+    return server['response']['upload_url']
 
 
 def upload_img_on_vk_server(server_address, filename):

@@ -21,20 +21,20 @@ if __name__ == '__main__':
         
         server_address = get_vk_server_address(token, group_id)
         
-        image_data = upload_img_on_vk_server(server_address, filename)
+        image = upload_img_on_vk_server(server_address, filename)
     except OSError as e:
         print ("Error: %s - %s." % (e.filename, e.strerror))
     finally:
         shutil.rmtree('files')
     
-    image_photo = image_data['photo']
-    image_server = image_data['server']
-    image_hash = image_data['hash']
+    image_photo = image['photo']
+    image_server = image['server']
+    image_hash = image['hash']
     
-    saved_image_data = save_image_in_group(token, group_id, image_photo, image_server, image_hash)
+    saved_image = save_image_in_group(token, group_id, image_photo, image_server, image_hash)
     
-    image_id = saved_image_data['response'][0]['id']
-    owner_id = saved_image_data['response'][0]['owner_id']
+    image_id = saved_image['response'][0]['id']
+    owner_id = saved_image['response'][0]['owner_id']
     
     response = public_image_in_group(token, group_id, image_id, owner_id, comic_alt)
     
