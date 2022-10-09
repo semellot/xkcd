@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import shutil
 
 from functions import (
     download_random_comic,
@@ -15,17 +16,19 @@ if __name__ == '__main__':
     group_id = os.environ['GROUP_ID']
     token = os.environ['ACCESS_TOKEN']
     
-    # сохранить последний комикс
-    filename, comic_alt = download_random_comic()
-    
-    # получить адрес сервера vk
-    server_address = get_vk_server_address(token, group_id)
-    
-    # загрузить фото на сервер vk
     try:
+        # сохранить последний комикс
+        filename, comic_alt = download_random_comic()
+        
+        # получить адрес сервера vk
+        server_address = get_vk_server_address(token, group_id)
+        
+        # загрузить фото на сервер vk
         image_data = upload_img_on_vk_server(server_address, filename)
     except OSError as e:
         print ("Error: %s - %s." % (e.filename, e.strerror))
+    finally:
+        shutil.rmtree('files')
     
     # сохранить комикс в группе
     saved_image_data = save_image_in_group(token, group_id, image_data)

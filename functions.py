@@ -1,6 +1,5 @@
 import os
 import sys
-import shutil
 from pathlib import Path
 import requests
 from urllib.parse import urlparse
@@ -54,8 +53,6 @@ def upload_img_on_vk_server(server_address, filename):
         }
         response = requests.post(url, files=files)
     response.raise_for_status()
-    
-    shutil.rmtree('files')
     
     return response.json()
 
