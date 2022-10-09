@@ -30,9 +30,16 @@ if __name__ == '__main__':
     finally:
         shutil.rmtree('files')
     
+    image_photo = image_data['photo']
+    image_server = image_data['server']
+    image_hash = image_data['hash']
+    
     # сохранить комикс в группе
-    saved_image_data = save_image_in_group(token, group_id, image_data)
+    saved_image_data = save_image_in_group(token, group_id, image_photo, image_server, image_hash)
+    
+    image_id = saved_image_data['response'][0]['id']
+    owner_id = saved_image_data['response'][0]['owner_id']
     
     # Сделать публикацию
-    public_image_in_group(token, group_id, saved_image_data, comic_alt)
+    public_image_in_group(token, group_id, image_id, owner_id, comic_alt)
     
