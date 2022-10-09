@@ -6,9 +6,10 @@ import requests
 from urllib.parse import urlparse
 import random
 
+COUNT_COMICS = 2681
 
 def get_image_from_xkcd():
-    comic_id = random.randint(1,2681)
+    comic_id = random.randint(1,COUNT_COMICS)
     url = f'https://xkcd.com/{comic_id}/info.0.json'
     response = requests.get(url)
     response.raise_for_status()
