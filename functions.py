@@ -18,14 +18,13 @@ def download_random_comic():
     
     comic_url = decoded_response['img']
     comic_alt = decoded_response['alt']
-    extensions = ('.jpg', '.png', '.gif')
-    if comic_url.endswith(extensions):
-        filename = os.path.basename(comic_url)
-        image = requests.get(comic_url).content
-        Path('files').mkdir(parents=True, exist_ok=True)
-        with open(os.path.join('files', filename), 'wb') as file:
-            file.write(image)
-        return filename, comic_alt
+    
+    filename = os.path.basename(comic_url)
+    image = requests.get(comic_url).content
+    Path('files').mkdir(parents=True, exist_ok=True)
+    with open(os.path.join('files', filename), 'wb') as file:
+        file.write(image)
+    return filename, comic_alt
         
 
 def get_vk_server_address(token, group_id):

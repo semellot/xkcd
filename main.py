@@ -27,16 +27,9 @@ if __name__ == '__main__':
     finally:
         shutil.rmtree('files')
     
-    image_photo = image['photo']
-    image_server = image['server']
-    image_hash = image['hash']
+    saved_image = save_image_in_group(token, group_id, image['photo'], image['server'], image['hash'])
     
-    saved_image = save_image_in_group(token, group_id, image_photo, image_server, image_hash)
-    
-    image_id = saved_image['response'][0]['id']
-    owner_id = saved_image['response'][0]['owner_id']
-    
-    response = public_image_in_group(token, group_id, image_id, owner_id, comic_alt)
+    response = public_image_in_group(token, group_id, saved_image['response'][0]['id'], saved_image['response'][0]['owner_id'], comic_alt)
     
     if 'error' not in response:
         print('Комикс опубликован в группе')
