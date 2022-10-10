@@ -23,13 +23,25 @@ if __name__ == '__main__':
         
         image = upload_img_on_vk_server(server_address, filename)
     except OSError as e:
-        print ("Error: %s - %s." % (e.filename, e.strerror))
+        print ('Error: %s - %s.' % (e.filename, e.strerror))
     finally:
         shutil.rmtree('files')
     
-    saved_image = save_image_in_group(token, group_id, image['photo'], image['server'], image['hash'])
+    saved_image = save_image_in_group(
+        token,
+        group_id,
+        image['photo'],
+        image['server'],
+        image['hash']
+    )
     
-    response = public_image_in_group(token, group_id, saved_image['response'][0]['id'], saved_image['response'][0]['owner_id'], comic_alt)
+    response = public_image_in_group(
+        token,
+        group_id,
+        saved_image['response'][0]['id'],
+        saved_image['response'][0]['owner_id'],
+        comic_alt
+    )
     
     if 'error' not in response:
         print('Комикс опубликован в группе')
